@@ -50,8 +50,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
-import android.hardware.IIrdaManager;
-import android.hardware.IrdaManager;
 import android.hardware.ISerialManager;
 import android.hardware.SensorManager;
 import android.hardware.SerialManager;
@@ -555,13 +553,6 @@ class ContextImpl extends Context {
                 public Object createService(ContextImpl ctx) {
                     final Context outerContext = ctx.getOuterContext();
                     return new ProfileManager (outerContext, ctx.mMainThread.getHandler());
-                }});
-
-        registerService(IRDA_SERVICE, new StaticServiceFetcher() {
-                public Object createStaticService() {
-                    IBinder b = ServiceManager.getService(IRDA_SERVICE);
-                    IIrdaManager service = IIrdaManager.Stub.asInterface(b);
-                    return new IrdaManager(service);
                 }});
 
         registerService(WimaxManagerConstants.WIMAX_SERVICE, new ServiceFetcher() {
